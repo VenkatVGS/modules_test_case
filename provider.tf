@@ -5,6 +5,14 @@ terraform {
       version = "~> 5.0"
     }
   }
+    backend "remote" {
+    hostname     = "venkatesh0608.scalr.io"  # Your Scalr hostname
+    organization = "venkatesh0608"
+
+    workspaces {
+      name = "test-environment"
+    }
+  }
 }
 
 # Configure the AWS Provider
