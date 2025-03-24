@@ -10,7 +10,7 @@ terraform {
     organization = "venkatesh0608"
 
     workspaces {
-      name = "test-environment"
+      name = "modules"
     }
   }
 }
