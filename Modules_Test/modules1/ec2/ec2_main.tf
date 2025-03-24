@@ -15,7 +15,8 @@ resource "aws_instance" "web1" {
     host = self.public_ip # Understand what is "self"
     user = "ec2-user"
     password = ""
-    private_key = file("${path.module}/private-key/Mumbai-Linux.pem")
+    #private_key = file("${path.module}/private-key/Mumbai-Linux.pem")
+    private_key = data.scalr_ssh_key.mumbai_ssh_key.private_key
   }  
   provisioner "file" {
     source      = "${path.module}/apps/index.html"
@@ -46,7 +47,8 @@ resource "aws_instance" "web2" {
     host = self.public_ip # Understand what is "self"
     user = "ec2-user"
     password = ""
-    private_key = file("${path.module}/private-key/Mumbai-Linux.pem")
+    #private_key = file("${path.module}/private-key/Mumbai-Linux.pem")
+    private_key = data.scalr_ssh_key.mumbai_ssh_key.private_key
   }
   provisioner "file" {
     source      = "${path.module}/apps/index.html"
@@ -58,5 +60,9 @@ resource "aws_instance" "web2" {
       "sudo cp /tmp/index.html /var/www/html"
     ]
   }
+}
+
+data "scalr_ssh_key" "mumbai_ssh_key" {
+  name = "Mumbai-SSH-Key"
 }
 
